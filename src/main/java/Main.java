@@ -17,36 +17,43 @@ public class Main {
             DbHandler dbHandler = DbHandler.getInstance();
             assert statement != null;
             if (statement.toLowerCase(Locale.ROOT).equals("статья")) {
-                List<Article> articles = dbHandler.getArticles(command, sfBy);
-                if (command != 5 & command != 6) {
-                    for (Article article : articles) {
-                        System.out.println(article.toString());
+                if (command != 8) {
+                    List<Article> articles = dbHandler.getArticles(command, sfBy);
+                    if (command != 5 & command != 6) {
+                        for (Article article : articles) {
+                            System.out.println(article.toString());
+                        }
                     }
+                } else {
+                    System.out.println("Введите ID продукта");
+                    int productID = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.println("Введите имя статьи");
+                    String ArticleName = scanner.nextLine();
+                    System.out.println("Введите текст статьи");
+                    String Content = scanner.nextLine();
+                    dbHandler.addArticle(new Article(productID, ArticleName, Content));
                 }
             }
             if (statement.toLowerCase(Locale.ROOT).equals("продукт")) {
-                List<Product> products = dbHandler.getProducts(command, sfBy);
-                if (command != 5 & command != 6) {
-                    for (Product product : products) {
-                        System.out.println(product.toString());
+                if (command != 7) {
+                    List<Product> products = dbHandler.getProducts(command, sfBy);
+                    if (command != 5 & command != 6) {
+                        for (Product product : products) {
+                            System.out.println(product.toString());
+                        }
                     }
+                } else {
+                    scanner.nextLine();
+                    System.out.println("Введите имя продукта");
+                    String ProductName = scanner.nextLine();
+                    System.out.println("Введите описание продукта");
+                    String Description = scanner.nextLine();
+                    System.out.println("Введите цену продукта");
+                    Double Cost = scanner.nextDouble();
+                    dbHandler.addProduct(new Product(ProductName, Cost, Description));
                 }
             }
-            // Добавляем запись
-            // dbHandler.addProduct(new Product("hello", 122512455, "aasdad"));
-            // dbHandler.addArticle(new Article(4, "hell12o", "myartifasafcle"));
-            // Получаем все записи и выводим их на консоль
-            /* List<Product> products = dbHandler.getAllProducts();
-            for (Product product : products) {
-                System.out.println(product.toString());
-            }
-            List<Article> articles = dbHandler.getArticles();
-            for (Article article : articles) {
-                System.out.println(article.toString());
-            }
-            // Удаление записи с id = 8
-            //dbHandler.deleteProduct(8); */
-
 
         } catch (
                 SQLException e) {
@@ -78,6 +85,7 @@ public class Main {
                         "5 - Удалить статью по ID\n" +
                         "6 - Модифицировать статью\n" +
                         "7 - Вывод статьи по productID\n" +
+                        "8 - Добавить статью\n" +
                         "0 - Назад");
                 stateNum = scanner.nextInt();
                 if (stateNum >= 0 & stateNum <= 7) {
@@ -94,6 +102,7 @@ public class Main {
                         "4 - Вывод отфильтрованного списка продуктов\n" +
                         "5 - Удалить продукт по ID\n" +
                         "6 - Модифицировать продукт\n" +
+                        "7 - Добвить продукт\n" +
                         "0 - Назад");
                 stateNum = scanner.nextInt();
                 if (stateNum >= 0 & stateNum <= 6) {

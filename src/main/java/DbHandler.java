@@ -195,6 +195,7 @@ public class DbHandler {
         }
 
 
+
         // Statement используется для того, чтобы выполнить sql-запрос
         try (Statement statement = this.connection.createStatement()) {
             // В данный список будем загружать наши статьи, полученные из БД
